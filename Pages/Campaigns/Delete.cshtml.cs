@@ -10,50 +10,50 @@ using RazorPagesCampaign.Models;
 
 namespace RazorPagesCampaign.Pages.Campaigns
 {
-    public class DeleteModel : PageModel
-    {
-        private readonly RazorPagesCampaignContext _context;
+	public class DeleteModel : PageModel
+	{
+		private readonly RazorPagesCampaignContext _context;
 
-        public DeleteModel(RazorPagesCampaignContext context)
-        {
-            _context = context;
-        }
+		public DeleteModel(RazorPagesCampaignContext context)
+		{
+			_context = context;
+		}
 
-        [BindProperty]
-        public Campaign Campaign { get; set; }
+		[BindProperty]
+		public Campaign Campaign { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+		public async Task<IActionResult> OnGetAsync(int? id)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
 
-            Campaign = await _context.Campaign.FirstOrDefaultAsync(m => m.Id == id);
+			Campaign = await _context.Campaign.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Campaign == null)
-            {
-                return NotFound();
-            }
-            return Page();
-        }
+			if (Campaign == null)
+			{
+				return NotFound();
+			}
+			return Page();
+		}
 
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+		public async Task<IActionResult> OnPostAsync(int? id)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
 
-            Campaign = await _context.Campaign.FindAsync(id);
+			Campaign = await _context.Campaign.FindAsync(id);
 
-            if (Campaign != null)
-            {
-                _context.Campaign.Remove(Campaign);
-                await _context.SaveChangesAsync();
-            }
+			if (Campaign != null)
+			{
+				_context.Campaign.Remove(Campaign);
+				await _context.SaveChangesAsync();
+			}
 
-            return RedirectToPage("./Index");
-        }
-    }
+			return RedirectToPage("./Index");
+		}
+	}
 }
