@@ -41,7 +41,10 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @String.Join(", ", item.Keywords)
+                @foreach (var keyword in item.Keywords)
+                {
+                    @($"#{keyword.Name}")
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BidAmount)
